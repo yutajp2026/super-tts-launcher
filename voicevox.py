@@ -241,6 +241,6 @@ def tts(
         if platform.system() == "Windows":
             os.startfile(save_path)
 
-    gr.Info(f"音声ファイルを保存しました: {save_path}")
+    gr.Info(f"VoiceVox音声ファイルを保存しました: {save_path}")
 
     return f"音声ファイルを保存しました: {save_path}"
