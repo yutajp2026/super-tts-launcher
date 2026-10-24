@@ -4,6 +4,7 @@ import webbrowser
 import gradio as gr
 import platform
 import gemini_tts
+import voicevox
 
 if os.path.exists('gemini_api_key.txt'):
     with open('gemini_api_key.txt', "r", encoding="utf-8") as f:
@@ -51,10 +52,21 @@ with gr.Blocks() as demo:
         save_directory = gr.Textbox(label="save_directory", placeholder="音声を保存するディレクトリ。")
         file_name = gr.Textbox(label="file_name", placeholder="保存するファイル名。")
         auto_open = gr.Checkbox(label="auto_open", value=True)
-        output = gr.Audio(label="Output")
+        output = gr.Textbox(label="Output")
 
         generate_button = gr.Button("Generate")
         generate_button.click(fn=gemini_tts.tts, inputs=[prompt, speaker, save_directory, file_name, api_key, auto_open], outputs=output)
+    with gr.Tab("Voicevox"):
+        gr.Markdown("# Voicevox Core")
+        prompt = gr.Textbox(label="prompt", placeholder="入力テキスト。")
+        speaker = gr.Dropdown(label="speaker", choices=list(voicevox.VOICE_MODELS.keys()), value="ずんだもん")
+        style = gr.Textbox(label="style", placeholder="スタイル。hなどと入力すると選択したキャラクターの一覧が表示されます。", value=None)
+        save_directory = gr.Textbox(label="save_directory", placeholder="音声を保存するディレクトリ。")
+        file_name = gr.Textbox(label="file_name", placeholder="保存するファイル名。")
+        auto_open = gr.Checkbox(label="auto_open", value=True)
+        output = gr.Textbox(label="Output")
+        generate_button = gr.Button("Generate")
+        generate_button.click(fn=voicevox.tts, inputs=[prompt, speaker, save_directory, file_name, auto_open, style], outputs=output)
     with gr.Tab("メニュー"):
         gr.Markdown("# サーバー")
         def quit(save_keys: bool):

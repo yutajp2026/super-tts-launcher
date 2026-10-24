@@ -194,7 +194,9 @@ def tts(
         style = "ノーマル" if "ノーマル" in available_styles else next(iter(available_styles))
     if style not in available_styles:
         styles = ", ".join(available_styles)
-        return f"{speaker} の未対応スタイルです: {style} (利用可能: {styles})"
+        return f"{speaker} の利用可能スタイルはこれらのみです: {styles})"
+    if not prompt:
+        return "プロンプトを入力してください。"
 
     model_filename, style_id = available_styles[style]
 
@@ -231,7 +233,7 @@ def tts(
     else:
         file_name += ".wav"
 
-    save_path = os.path.join(save_directory, f"{file_name}.wav")
+    save_path = os.path.join(save_directory, f"{file_name}")
     with open(save_path, "wb") as output_file:
         output_file.write(wav)
 
@@ -240,3 +242,5 @@ def tts(
             os.startfile(save_path)
 
     gr.Info(f"音声ファイルを保存しました: {save_path}")
+
+    return f"音声ファイルを保存しました: {save_path}"
