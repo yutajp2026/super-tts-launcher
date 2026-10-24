@@ -50,7 +50,7 @@ with gr.Blocks() as demo:
         ]
         speaker = gr.Dropdown(label="speaker", choices=speakers, value="Kore")
         save_directory = gr.Textbox(label="save_directory", placeholder="音声を保存するディレクトリ。")
-        file_name = gr.Textbox(label="file_name", placeholder="保存するファイル名。")
+        file_name = gr.Textbox(label="file_name", placeholder="保存するファイル名。拡張子はいらない。")
         auto_open = gr.Checkbox(label="auto_open", value=True)
         output = gr.Textbox(label="Output")
 
@@ -58,11 +58,13 @@ with gr.Blocks() as demo:
         generate_button.click(fn=gemini_tts.tts, inputs=[prompt, speaker, save_directory, file_name, api_key, auto_open], outputs=output)
     with gr.Tab("Voicevox"):
         gr.Markdown("# Voicevox Core")
+        if os.getenv("device") == "cuda":
+            gr.Markdown("CUDAモード")
         prompt = gr.Textbox(label="prompt", placeholder="入力テキスト。")
         speaker = gr.Dropdown(label="speaker", choices=list(voicevox.VOICE_MODELS.keys()), value="ずんだもん")
-        style = gr.Textbox(label="style", placeholder="スタイル。hなどと入力すると選択したキャラクターの一覧が表示されます。", value=None)
+        style = gr.Textbox(label="style", placeholder="スタイル。hなどと入力すると選択したキャラクターの一覧が表示されます。")
         save_directory = gr.Textbox(label="save_directory", placeholder="音声を保存するディレクトリ。")
-        file_name = gr.Textbox(label="file_name", placeholder="保存するファイル名。")
+        file_name = gr.Textbox(label="file_name", placeholder="保存するファイル名。拡張子はいらない。")
         auto_open = gr.Checkbox(label="auto_open", value=True)
         output = gr.Textbox(label="Output")
         generate_button = gr.Button("Generate")

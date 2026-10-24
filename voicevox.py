@@ -184,13 +184,13 @@ def tts(
     save_directory: str,
     file_name: str,
     auto_open: bool,
-    style: Optional[str] = None,
+    style: str,
 ):
     if speaker not in VOICE_MODELS:
         return f"未対応の話者です: {speaker}"
 
     available_styles = VOICE_MODELS[speaker]
-    if style is None:
+    if style  == "":
         style = "ノーマル" if "ノーマル" in available_styles else next(iter(available_styles))
     if style not in available_styles:
         styles = ", ".join(available_styles)
