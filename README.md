@@ -5,7 +5,7 @@
 ## アプリの特徴
 
 - 生成スタイル
-  - 多種類の音声合成に対応: 現時点では[Gemini API](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ja)、[VoiceVox Core](https://github.com/VOICEVOX/voicevox_core)に対応する予定です。タブで切り替えて利用できます。
+  - 多種類の音声合成に対応: 現時点では[Gemini API](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ja)、[VoiceVox Core](https://github.com/VOICEVOX/voicevox_core)、[Qwen TTS](https://github.com/QwenLM/Qwen3-TTS)に対応する予定です。タブで切り替えて利用できます。
   - 話者・スタイルを選択: 話者や、一部ではスタイルを選べます。
 - ファイルの自動保存と自動再生
   - WAVファイルで保存: 保存先とファイル名を指定できます。
