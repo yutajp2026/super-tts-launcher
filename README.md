@@ -5,7 +5,7 @@
 ## アプリの特徴
 
 - 生成スタイル
-  - 多種類の音声合成に対応: 現時点では[Gemini API](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ja)、[VoiceVox Core](https://github.com/VOICEVOX/voicevox_core)に対応しています。タブで切り替えて利用できます。
+  - 多種類の音声合成に対応: 現時点では[Gemini API](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ja)、[VoiceVox Core](https://github.com/VOICEVOX/voicevox_core)、[AquesTalk1](https://www.a-quest.com/products/aquestalk_1.html)に対応しています。タブで切り替えて利用できます。
   - 話者・スタイルを選択: 話者や、一部ではスタイルを選べます。
 - ファイルの自動保存と自動再生
   - WAVファイルで保存: 保存先とファイル名を指定できます。
