@@ -69,14 +69,6 @@ with gr.Blocks() as demo:
         output = gr.Textbox(label="Output")
         generate_button = gr.Button("Generate")
         generate_button.click(fn=voicevox.tts, inputs=[prompt, speaker, save_directory, file_name, auto_open, style], outputs=output)
-    with gr.Tab("AquesTalk"):
-        gr.Markdown("AquesTalk")
-        prompt = gr.Textbox(label="prompt", placeholder="AquesTalk1のかな表記音声記号列。")
-        speakers = ["dvd", "f1", "f2", "imd1", "jgr", "m1", "m2", "r1"]
-        speaker = gr.Dropdown(label="speaker", choices=speakers, value="f1")
-        output = gr.Audio(label="Output", format="wav")
-        generate_button = gr.Button("Generate")
-        generate_button.click(fn="", inputs=[prompt, speaker], outputs=output)
     with gr.Tab("メニュー"):
         gr.Markdown("# サーバー")
         def quit(save_keys: bool):
