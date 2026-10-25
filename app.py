@@ -71,7 +71,7 @@ with gr.Blocks() as demo:
         generate_button = gr.Button("Generate")
         generate_button.click(fn=voicevox.tts, inputs=[prompt, speaker, save_directory, file_name, auto_open, style], outputs=output)
     with gr.Tab("Qwen"):
-        gr.Markdown("# Qwen3 TTS")
+        gr.Markdown("# Qwen3 TTS 12Hz 0.6B CustomVoice")
         speakers = [
             "Vivian",
             "Serena",
