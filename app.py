@@ -5,6 +5,7 @@ import gradio as gr
 import platform
 import gemini_tts
 import voicevox
+import qwen
 
 if os.path.exists('gemini_api_key.txt'):
     with open('gemini_api_key.txt', "r", encoding="utf-8") as f:
@@ -69,6 +70,26 @@ with gr.Blocks() as demo:
         output = gr.Textbox(label="Output")
         generate_button = gr.Button("Generate")
         generate_button.click(fn=voicevox.tts, inputs=[prompt, speaker, save_directory, file_name, auto_open, style], outputs=output)
+    with gr.Tab("Qwen"):
+        speakers = [
+            "Vivian",
+            "Serena",
+            "Uncle_Fu",
+            "Dylan",
+            "Eric",
+            "Ryan",
+            "Aiden",
+            "Ono_Anna",
+            "Sohee",
+        ]
+        prompt = gr.Textbox(label="prompt", placeholder="入力テキスト。")
+        speaker = gr.Dropdown(label="speaker", choices=speakers, value="Ono_Anna")
+        save_directory = gr.Textbox(label="save_directory", placeholder="音声を保存するディレクトリ。")
+        file_name = gr.Textbox(label="file_name", placeholder="保存するファイル名。拡張子はいらない。")
+        auto_open = gr.Checkbox(label="auto_open", value=True)
+        output = gr.Textbox(label="Output")
+        generate_button = gr.Button("Generate")
+        generate_button.click(fn=qwen.tts, inputs=[prompt, speaker, save_directory, file_name, auto_open], outputs=output)
     with gr.Tab("メニュー"):
         gr.Markdown("# サーバー")
         def quit(save_keys: bool):

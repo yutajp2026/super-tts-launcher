@@ -1,5 +1,4 @@
 import os
-from typing import Optional
 import gradio as gr
 import platform
 from voicevox_core.blocking import Onnxruntime, OpenJtalk, Synthesizer, VoiceModelFile
