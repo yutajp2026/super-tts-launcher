@@ -12,6 +12,7 @@ def tts(prompt: str, speaker: str, save_directory: str, file_name: str, auto_ope
             device_map="cuda:0",
             dtype=torch.bfloat16,
         )
+        print("CUDAモード")
     else:
         model = Qwen3TTSModel.from_pretrained(
             "Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice",
