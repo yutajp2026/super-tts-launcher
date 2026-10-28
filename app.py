@@ -102,9 +102,15 @@ with gr.Blocks() as demo:
             gr.Info("アプリケーション終了。タブは手動で閉じてください。")
             time.sleep(1)
             os._exit(0)
-        save_keys = gr.Checkbox(label="APIキーを保持", value=True, interactive=True)
+        save_keys = gr.Checkbox(label="Gemini APIキーを保持", value=True, interactive=True)
         quit_btn = gr.Button("終了")
         quit_btn.click(fn=quit, inputs=[save_keys], outputs=[])
+        gr.Markdown("# 製品について")
+        gr.Markdown("https://github.com/yutajp2026/super-tts-launcher")
+        version = os.getenv("VERSION")
+        if version:
+            gr.Markdown("最新のバージョンは、上記GitHubページで確認できます。")
+            gr.Markdown("現在使用しているアプリのバージョン: " + version)
 
 if platform.system() == "Windows":
     webbrowser.open('http://127.0.0.1:7860')
