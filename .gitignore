@@ -1,5 +1,5 @@
 *.bat
 *.exe
-*.txt
+gemini_api_key.txt
 voicevox_core
 venv

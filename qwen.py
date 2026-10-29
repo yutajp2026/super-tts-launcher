@@ -6,7 +6,7 @@ import soundfile as sf
 from qwen_tts import Qwen3TTSModel
 
 def tts(prompt: str, speaker: str, save_directory: str, file_name: str, auto_open: bool):
-    if os.getenv("device") == "cuda":
+    if torch.cuda.is_available():
         model = Qwen3TTSModel.from_pretrained(
             "Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice",
             device_map="cuda:0",

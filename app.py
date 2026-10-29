@@ -2,6 +2,7 @@ import os
 import time
 import webbrowser
 import gradio as gr
+import torch
 import platform
 import gemini_tts
 import voicevox
@@ -59,7 +60,7 @@ with gr.Blocks() as demo:
         generate_button.click(fn=gemini_tts.tts, inputs=[prompt, speaker, save_directory, file_name, api_key, auto_open], outputs=output)
     with gr.Tab("Voicevox"):
         gr.Markdown("# Voicevox Core")
-        if os.getenv("device") == "cuda":
+        if torch.cuda.is_available():
             gr.Markdown("CUDAモード")
         prompt = gr.Textbox(label="prompt", placeholder="入力テキスト。")
         speaker = gr.Dropdown(label="speaker", choices=list(voicevox.VOICE_MODELS.keys()), value="ずんだもん")
@@ -72,7 +73,7 @@ with gr.Blocks() as demo:
         generate_button.click(fn=voicevox.tts, inputs=[prompt, speaker, save_directory, file_name, auto_open, style], outputs=output)
     with gr.Tab("Qwen"):
         gr.Markdown("# Qwen3 TTS 12Hz 0.6B CustomVoice")
-        if os.getenv("device") == "cuda":
+        if torch.cuda.is_available():
             gr.Markdown("CUDAモード")
         speakers = [
             "Vivian",

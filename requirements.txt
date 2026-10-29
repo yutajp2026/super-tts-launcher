@@ -1,0 +1,7 @@
+gradio
+google-genai
+qwen-tts
+https://github.com/VOICEVOX/voicevox_core/releases/download/0.17.1/voicevox_core-0.17.1-cp310-abi3-win_amd64.whl
+
+--extra-index-url https://download.pytorch.org/whl/cu126
+torch
