@@ -28,9 +28,9 @@ fi
 
 if [ ! -d "voicevox_core" ]; then
     binary=download-linux-x64
-    curl -sSfL https://github.com/VOICEVOX/voicevox_core/releases/latest/download/${binary} -o download
-    chmod +x download
-    ./download --devices ${device}
+    curl -sSfL https://github.com/VOICEVOX/voicevox_core/releases/latest/download/${binary} -o voicevox-download
+    chmod +x voicevox-download
+    ./voicevox-download --devices ${device}
 fi
 
 echo "アプリを起動中..."
