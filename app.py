@@ -2,22 +2,24 @@ import os
 import time
 import webbrowser
 import gradio as gr
-import torch
 import platform
 import gemini_tts
 import voicevox
-import qwen
+import elevenlabs_tts
 
 if os.path.exists('gemini_api_key.txt'):
     with open('gemini_api_key.txt', "r", encoding="utf-8") as f:
         gemini_api_key = f.read()
+if os.path.exists('elevenlabs_api_key.txt'):
+    with open('elevenlabs_api_key.txt', "r", encoding="utf-8") as f:
+        elevenlabs_api_key = f.read()
 
 with gr.Blocks() as demo:
     with gr.Tab("Gemini"):
         gr.Markdown("# Gemini 3.1 Flash TTS Preview")
         gr.Markdown("API Keyは[ここ](https://aistudio.google.com/api-keys)から取得してください。")
         prompt = gr.Textbox(label="prompt", placeholder="入力テキスト。")
-        api_key = gr.Textbox(label="API Key", placeholder="Gemini API Key", value=gemini_api_key if os.path.exists('gemini_api_key.txt') else "", type="password")
+        api_key = gr.Textbox(label="API Key", placeholder="Gemini API Key", value=gemini_api_key if os.path.exists('gemini_api_key.txt') else "")
         speakers = [
             "Zephyr",
             "Puck",
@@ -58,9 +60,22 @@ with gr.Blocks() as demo:
 
         generate_button = gr.Button("Generate")
         generate_button.click(fn=gemini_tts.tts, inputs=[prompt, speaker, save_directory, file_name, api_key, auto_open], outputs=output)
+    with gr.Tab("ElevenLabs"):
+        gr.Markdown("# Eleven V4")
+        gr.Markdown("API Keyは[ここ](https://elevenlabs.io/app/developers/api-keys)から取得してください。")
+        gr.Markdown("音声IDは[ここ](https://elevenlabs.io/app/voice-library)から確認できます。")
+        prompt = gr.Textbox(label="prompt", placeholder="入力テキスト。")
+        voice_id = gr.Textbox(label="voice_id", placeholder="音声ID。ElevenLabsのサイトで確認できます。", value="JBFqnCBsd6RMkjVDRZzb")
+        api_key = gr.Textbox(label="API Key", placeholder="ElevenLabs API Key", value=elevenlabs_api_key if os.path.exists('elevenlabs_api_key.txt') else "")
+        save_directory = gr.Textbox(label="save_directory", placeholder="音声を保存するディレクトリ。")
+        file_name = gr.Textbox(label="file_name", placeholder="保存するファイル名。拡張子はいらない。")
+        auto_open = gr.Checkbox(label="auto_open", value=True)
+        output = gr.Textbox(label="Output")
+        generate_button = gr.Button("Generate")
+        generate_button.click(fn=elevenlabs_tts.tts, inputs=[prompt, api_key, save_directory, file_name, auto_open, voice_id], outputs=output)
     with gr.Tab("Voicevox"):
         gr.Markdown("# Voicevox Core")
-        if torch.cuda.is_available():
+        if os.getenv("device") == "cuda":
             gr.Markdown("CUDAモード")
         prompt = gr.Textbox(label="prompt", placeholder="入力テキスト。")
         speaker = gr.Dropdown(label="speaker", choices=list(voicevox.VOICE_MODELS.keys()), value="ずんだもん")
@@ -71,35 +86,14 @@ with gr.Blocks() as demo:
         output = gr.Textbox(label="Output")
         generate_button = gr.Button("Generate")
         generate_button.click(fn=voicevox.tts, inputs=[prompt, speaker, save_directory, file_name, auto_open, style], outputs=output)
-    with gr.Tab("Qwen"):
-        gr.Markdown("# Qwen3 TTS 12Hz 0.6B CustomVoice")
-        if torch.cuda.is_available():
-            gr.Markdown("CUDAモード")
-        speakers = [
-            "Vivian",
-            "Serena",
-            "Uncle_Fu",
-            "Dylan",
-            "Eric",
-            "Ryan",
-            "Aiden",
-            "Ono_Anna",
-            "Sohee",
-        ]
-        prompt = gr.Textbox(label="prompt", placeholder="入力テキスト。")
-        speaker = gr.Dropdown(label="speaker", choices=speakers, value="Ono_Anna")
-        save_directory = gr.Textbox(label="save_directory", placeholder="音声を保存するディレクトリ。")
-        file_name = gr.Textbox(label="file_name", placeholder="保存するファイル名。拡張子はいらない。")
-        auto_open = gr.Checkbox(label="auto_open", value=True)
-        output = gr.Textbox(label="Output")
-        generate_button = gr.Button("Generate")
-        generate_button.click(fn=qwen.tts, inputs=[prompt, speaker, save_directory, file_name, auto_open], outputs=output)
     with gr.Tab("メニュー"):
         gr.Markdown("# サーバー")
         def quit(save_keys: bool):
             if not save_keys:
                 if os.path.exists('gemini_api_key.txt'):
                     os.remove('gemini_api_key.txt')
+                if os.path.exists('elevenlabs_api_key.txt'):
+                    os.remove('elevenlabs_api_key.txt')
             gr.Info("アプリケーション終了。タブは手動で閉じてください。")
             time.sleep(1)
             os._exit(0)

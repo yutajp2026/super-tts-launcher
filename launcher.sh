@@ -17,18 +17,16 @@ echo "pip を更新中..."
 python -m pip install --upgrade pip
 
 echo "パッケージをインストール中..."
-python -m pip install -r requirements.txt
-python -m pip install https://github.com/VOICEVOX/voicevox_core/releases/download/0.17.1/voicevox_core-0.17.1-cp310-abi3-manylinux_2_34_x86_64.whl
+python -m pip install gradio google-genai elevenlabs https://github.com/VOICEVOX/voicevox_core/releases/download/0.17.1/voicevox_core-0.17.1-cp310-abi3-manylinux_2_34_x86_64.whl
 
 if command -v nvidia-smi >/dev/null 2>&1 && nvidia-smi >/dev/null 2>&1; then
-    device=cuda
+    export device=cuda
 else
-    device=cpu
+    export device=cpu
 fi
 
 if [ ! -d "voicevox_core" ]; then
-    binary=download-linux-x64
-    curl -sSfL https://github.com/VOICEVOX/voicevox_core/releases/latest/download/${binary} -o voicevox-download
+    curl -sSfL https://github.com/VOICEVOX/voicevox_core/releases/latest/download/binary=download-linux-x64 -o voicevox-download
     chmod +x voicevox-download
     ./voicevox-download --devices ${device}
 fi
