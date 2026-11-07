@@ -97,7 +97,7 @@ with gr.Blocks() as demo:
             gr.Info("アプリケーション終了。タブは手動で閉じてください。")
             time.sleep(1)
             os._exit(0)
-        save_keys = gr.Checkbox(label="Gemini APIキーを保持", value=True, interactive=True)
+        save_keys = gr.Checkbox(label="APIキーを保持", value=True, interactive=True)
         quit_btn = gr.Button("終了")
         quit_btn.click(fn=quit, inputs=[save_keys], outputs=[])
         gr.Markdown("# 製品について")
