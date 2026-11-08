@@ -5,7 +5,7 @@
 ## アプリの特徴
 
 - 生成スタイル
-  - 多種類の音声合成に対応: 現時点では[Gemini API](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ja)、[ElevenLabs](https://elevenlabs.io/docs/eleven-api/quickstart)、[VoiceVox Core](https://github.com/VOICEVOX/voicevox_core)に対応する予定です。タブで切り替えて利用できます。
+  - 多種類の音声合成に対応: 現時点では[Gemini API](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ja)、[ElevenLabs API](https://elevenlabs.io/docs/eleven-api/quickstart)、[VoiceVox Core](https://github.com/VOICEVOX/voicevox_core)に対応しています。タブで切り替えて利用できます。
   - 話者・スタイルを選択: 話者や、一部ではスタイルを選べます。
 - ファイルの自動保存と自動再生
   - WAVファイルで保存: 保存先とファイル名を指定できます。
@@ -13,3 +13,34 @@
 - クイック起動
   - ローカルのブラウザーで操作: アプリを起動すると、ブラウザーから使える画面が開きます(Windowsのみ)。
   - CUDAに対応: 対応するNVIDIA GPU環境では、一部機能をCUDAモードで起動します。
+
+# インストール
+## Windows
+[Releases](https://github.com/yutajp2026/super-tts-launcher/releases)にインストーラを公開予定
+## Linux
+1. 下記のコマンドでPythonとgitをインストール
+```bash
+# Debian系(Ubuntuなど)
+sudo apt update
+sudo apt install python3 python3-pip python3-venv git
+```
+```bash
+# Red Hat系(Oracle Linuxなど)
+sudo dnf install python3 python3-pip python3-venv git
+```
+```bash
+# Arch系
+sudo pacman install python3 python3-pip python3-venv git
+```
+```bash
+# SUSE系
+sudo zypper install python3 python3-pip python3-venv git
+```
+2. `git clone https://github.com/yutajp2026/super-tts-launcher.git`でこのリポジトリをクローン
+3. `cd super-tts-launcher`でスクリプトディレクトリに移動
+4. `bash launcher.sh`で実行 ⚠️linuxの場合は自動でブラウザを開きません。
+5. `git pull`でアップデート
+
+# ライセンス
+
+本プロジェクトは、必要に応じて自由に改変・利用できます。ただし、悪用は厳禁です。なお、改変時は各AIのライセンスを守ってください。
