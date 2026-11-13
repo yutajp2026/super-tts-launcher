@@ -53,13 +53,10 @@ with gr.Blocks() as demo:
             "Sulafat",
         ]
         speaker = gr.Dropdown(label="speaker", choices=speakers, value="Kore")
-        save_directory = gr.Textbox(label="save_directory", placeholder="音声を保存するディレクトリ。")
-        file_name = gr.Textbox(label="file_name", placeholder="保存するファイル名。拡張子はいらない。")
-        auto_open = gr.Checkbox(label="auto_open", value=True)
-        output = gr.Textbox(label="Output")
+        audio_output = gr.Audio(label="生成音声", buttons=[])
 
         generate_button = gr.Button("Generate")
-        generate_button.click(fn=gemini_tts.tts, inputs=[prompt, speaker, save_directory, file_name, api_key, auto_open], outputs=output)
+        generate_button.click(fn=gemini_tts.tts, inputs=[prompt, speaker, api_key], outputs=audio_output)
     with gr.Tab("ElevenLabs"):
         gr.Markdown("# Eleven V4")
         gr.Markdown("API Keyは[ここ](https://elevenlabs.io/app/developers/api-keys)から取得してください。")
@@ -67,12 +64,9 @@ with gr.Blocks() as demo:
         prompt = gr.Textbox(label="prompt", placeholder="入力テキスト。")
         voice_id = gr.Textbox(label="voice_id", placeholder="音声ID。ElevenLabsのサイトで確認できます。", value="JBFqnCBsd6RMkjVDRZzb")
         api_key = gr.Textbox(label="API Key", placeholder="ElevenLabs API Key", value=elevenlabs_api_key if os.path.exists('elevenlabs_api_key.txt') else "")
-        save_directory = gr.Textbox(label="save_directory", placeholder="音声を保存するディレクトリ。")
-        file_name = gr.Textbox(label="file_name", placeholder="保存するファイル名。拡張子はいらない。")
-        auto_open = gr.Checkbox(label="auto_open", value=True)
-        output = gr.Textbox(label="Output")
+        audio_output = gr.Audio(label="生成音声", buttons=[])
         generate_button = gr.Button("Generate")
-        generate_button.click(fn=elevenlabs_tts.tts, inputs=[prompt, api_key, save_directory, file_name, auto_open, voice_id], outputs=output)
+        generate_button.click(fn=elevenlabs_tts.tts, inputs=[prompt, api_key, voice_id], outputs=audio_output)
     with gr.Tab("Voicevox"):
         gr.Markdown("# Voicevox Core")
         if os.getenv("device") == "cuda":
@@ -80,12 +74,9 @@ with gr.Blocks() as demo:
         prompt = gr.Textbox(label="prompt", placeholder="入力テキスト。")
         speaker = gr.Dropdown(label="speaker", choices=list(voicevox.VOICE_MODELS.keys()), value="ずんだもん")
         style = gr.Textbox(label="style", placeholder="スタイル。hなどと入力すると選択したキャラクターの一覧が表示されます。")
-        save_directory = gr.Textbox(label="save_directory", placeholder="音声を保存するディレクトリ。")
-        file_name = gr.Textbox(label="file_name", placeholder="保存するファイル名。拡張子はいらない。")
-        auto_open = gr.Checkbox(label="auto_open", value=True)
-        output = gr.Textbox(label="Output")
+        audio_output = gr.Audio(label="生成音声", buttons=[])
         generate_button = gr.Button("Generate")
-        generate_button.click(fn=voicevox.tts, inputs=[prompt, speaker, save_directory, file_name, auto_open, style], outputs=output)
+        generate_button.click(fn=voicevox.tts, inputs=[prompt, speaker, style], outputs=audio_output)
     with gr.Tab("メニュー"):
         gr.Markdown("# サーバー")
         def quit(save_keys: bool):

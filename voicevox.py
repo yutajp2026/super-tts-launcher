@@ -1,6 +1,5 @@
 import os
 import gradio as gr
-import platform
 from voicevox_core.blocking import Onnxruntime, OpenJtalk, Synthesizer, VoiceModelFile
 
 
@@ -180,22 +179,22 @@ VOICE_MODELS: dict[str, dict[str, tuple[str, int]]] = {
 def tts(
     prompt: str,
     speaker: str,
-    save_directory: str,
-    file_name: str,
-    auto_open: bool,
     style: str,
-):
+) -> bytes | None:
     if speaker not in VOICE_MODELS:
-        return f"未対応の話者です: {speaker}"
+        gr.Warning(f"未対応の話者です: {speaker}")
+        return None
 
     available_styles = VOICE_MODELS[speaker]
     if style  == "":
         style = "ノーマル" if "ノーマル" in available_styles else next(iter(available_styles))
     if style not in available_styles:
         styles = ", ".join(available_styles)
-        return f"{speaker} の利用可能スタイルはこれらのみです: {styles})"
+        gr.Warning(f"{speaker} の利用可能スタイルはこれらのみです: {styles}")
+        return None
     if not prompt:
-        return "プロンプトを入力してください。"
+        gr.Warning("プロンプトを入力してください。")
+        return None
 
     model_filename, style_id = available_styles[style]
 
@@ -218,28 +217,5 @@ def tts(
         synthesizer.load_voice_model(model)
 
     wav = synthesizer.tts(prompt, style_id)
-
-    if not save_directory:
-        if platform.system() == "Windows":
-            import getpass
-            save_directory = f"C:/Users/{getpass.getuser()}/Downloads/"
-        else:
-            os.makedirs("output", exist_ok=True)
-            save_directory = "output"
-
-    if not file_name:
-        file_name = "output.wav"
-    else:
-        file_name += ".wav"
-
-    save_path = os.path.join(save_directory, f"{file_name}")
-    with open(save_path, "wb") as output_file:
-        output_file.write(wav)
-
-    if auto_open:
-        if platform.system() == "Windows":
-            os.startfile(save_path)
-
-    gr.Info(f"VoiceVox音声ファイルを保存しました: {save_path}")
-
-    return f"音声ファイルを保存しました: {save_path}"
+    gr.Info(f"VOICEVOX Core ({speaker}・{style}) で音声を生成しました。")
+    return wav

@@ -8,9 +8,7 @@
   - 多種類の音声合成に対応: 現時点では[Gemini API](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ja)、[ElevenAPI](https://elevenlabs.io/docs/eleven-api/quickstart)、[VOICEVOX Core](https://github.com/VOICEVOX/voicevox_core)に対応しています。タブで切り替えて利用できます。
   - 話者・スタイルを選択: 話者や、一部ではスタイルを選べます。
 
-- ファイルの自動保存と自動再生
-  - WAVファイルで保存: 保存先とファイル名を指定できます。
-  - 生成後に自動再生: 自動で開く設定を有効にすると、生成した音声をすぐに確認できます。
+- 生成音声をWebUI内で再生: 保存先を指定せず、生成後すぐに画面内のプレーヤーで確認できます。
 
 - クイック起動
   - ローカルのブラウザーで操作: アプリを起動すると、ブラウザーから使える画面が開きます(Windowsのみ)。

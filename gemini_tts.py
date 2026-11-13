@@ -1,18 +1,18 @@
-import os
 from google import genai
-import gradio as gr
 import base64
-import platform
+import gradio as gr
 
-def tts(prompt: str, speaker: str, save_directory: str, file_name: str, key: str, auto_open: bool):
+def tts(prompt: str, speaker: str, key: str) -> bytes | None:
     if not key:
-        return "API Keyを入力してください。"
+        gr.Warning("API Keyを入力してください。")
+        return None
     
     with open('gemini_api_key.txt', 'w') as f:
         f.write(key)
 
     if not prompt:
-        return "プロンプトを入力してください。"
+        gr.Warning("プロンプトを入力してください。")
+        return None
     
     client = genai.Client(api_key=key)
 
@@ -34,28 +34,6 @@ def tts(prompt: str, speaker: str, save_directory: str, file_name: str, key: str
     )
 
 
-    if not save_directory:
-        if platform.system() == "Windows":
-            import getpass
-            save_directory = f"C:/Users/{getpass.getuser()}/Downloads/"
-        else:
-            os.makedirs("output", exist_ok=True)
-            save_directory = "output"
-
-    if not file_name:
-        file_name = "output.wav"
-    else:
-        file_name += ".wav"
-
-    save_path = os.path.join(save_directory, file_name)
-
-    with open(save_path, "wb") as f:
-        f.write(base64.b64decode(interaction.output_audio.data))
-
-    if auto_open:
-        if platform.system() == "Windows":
-            os.startfile(save_path)
-
-    gr.Info(f"Gemini音声ファイルを保存しました: {save_path}")
-
-    return f"音声ファイルを保存しました: {save_path}"
+    audio = base64.b64decode(interaction.output_audio.data)
+    gr.Info("Gemini (gemini-3.8-flash-tts) で音声を生成しました。")
+    return audio
