@@ -18,7 +18,7 @@
 
 # インストール
 ## Windows
-[Releases](https://github.com/yutajp2026/super-tts-launcher/releases)にインストーラを公開予定
+[Releases](https://github.com/yutajp2026/super-tts-launcher/releases)にインストーラを公開
 ## Linux
 1. 下記のコマンドでPythonとgitをインストール
 ```bash
