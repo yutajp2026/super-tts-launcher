@@ -3,14 +3,14 @@ import gradio as gr
 
 def tts(prompt: str, key: str, voice_id: str) -> bytes | None:
     if not key:
-        gr.Warning("API Keyを入力してください。")
+        gr.Warning("ElevenLabs:API Keyを入力してください。")
         return None
     
     with open('elevenlabs_api_key.txt', 'w') as f:
         f.write(key)
 
     if not prompt:
-        gr.Warning("プロンプトを入力してください。")
+        gr.Warning("ElevenLabs:プロンプトを入力してください。")
         return None
 
     client = ElevenLabs(api_key=key)

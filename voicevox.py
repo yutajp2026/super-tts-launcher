@@ -182,7 +182,7 @@ def tts(
     style: str,
 ) -> bytes | None:
     if speaker not in VOICE_MODELS:
-        gr.Warning(f"未対応の話者です: {speaker}")
+        gr.Warning(f"VOICEVOX Core: 未対応の話者です: {speaker}")
         return None
 
     available_styles = VOICE_MODELS[speaker]
@@ -190,10 +190,10 @@ def tts(
         style = "ノーマル" if "ノーマル" in available_styles else next(iter(available_styles))
     if style not in available_styles:
         styles = ", ".join(available_styles)
-        gr.Warning(f"{speaker} の利用可能スタイルはこれらのみです: {styles}")
+        gr.Warning(f"VOICEVOX Core: {speaker} の利用可能スタイルはこれらのみです: {styles}")
         return None
     if not prompt:
-        gr.Warning("プロンプトを入力してください。")
+        gr.Warning("VOICEVOX Core: プロンプトを入力してください。")
         return None
 
     model_filename, style_id = available_styles[style]

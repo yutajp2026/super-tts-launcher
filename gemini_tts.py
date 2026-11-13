@@ -4,14 +4,14 @@ import gradio as gr
 
 def tts(prompt: str, speaker: str, key: str) -> bytes | None:
     if not key:
-        gr.Warning("API Keyを入力してください。")
+        gr.Warning("Gemini:API Keyを入力してください。")
         return None
     
     with open('gemini_api_key.txt', 'w') as f:
         f.write(key)
 
     if not prompt:
-        gr.Warning("プロンプトを入力してください。")
+        gr.Warning("Gemini:プロンプトを入力してください。")
         return None
     
     client = genai.Client(api_key=key)
