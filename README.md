@@ -14,6 +14,8 @@
   - ローカルのブラウザーで操作: アプリを起動すると、ブラウザーから使える画面が開きます(Windowsのみ)。
   - CUDAに対応: 対応するNVIDIA GPU環境では、一部機能をCUDAモードで起動します。
 
+# 試用
+[HF Space](https://yutajapan2026-tts-test.hf.space/)
 # インストール
 ## Windows
 [Releases](https://github.com/yutajp2026/super-tts-launcher/releases)にインストーラを公開
