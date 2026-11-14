@@ -14,7 +14,10 @@ def tts(prompt: str, speaker: str, key: str) -> bytes | None:
         gr.Warning("Gemini:プロンプトを入力してください。")
         return None
     
-    client = genai.Client(api_key=key)
+    client = genai.Client(
+        api_key=key,
+        http_options={"api_version": "v1beta"},
+    )
 
     interaction = client.interactions.create(
         model="gemini-3.8-flash-tts",
