@@ -8,7 +8,7 @@
   - 多種類の音声合成に対応: 現時点では[Gemini API](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ja)、[ElevenAPI](https://elevenlabs.io/docs/eleven-api/quickstart)、[VOICEVOX Core](https://github.com/VOICEVOX/voicevox_core)に対応しています。タブで切り替えて利用できます。
   - 話者・スタイルを選択: 話者や、一部ではスタイルを選べます。
 
-- 生成音声をWebUI内で再生・ダウンロード: 生成後すぐに画面内のプレーヤーで確認し、ダウンロードボタンからブラウザーの機能で保存できます。
+- 生成音声をWebUI内で再生(1.1以降)・ダウンロード: 生成後すぐに画面内のプレーヤーで確認し、ダウンロードボタンからブラウザーの機能で保存できます。
 
 - クイック起動
   - ローカルのブラウザーで操作: アプリを起動すると、ブラウザーから使える画面が開きます(Windowsのみ)。
