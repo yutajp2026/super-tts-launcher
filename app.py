@@ -53,7 +53,7 @@ with gr.Blocks() as demo:
             "Sulafat",
         ]
         speaker = gr.Dropdown(label="speaker", choices=speakers, value="Kore")
-        audio_output = gr.Audio(label="生成音声", buttons=[])
+        audio_output = gr.Audio(label="生成音声", buttons=["download"])
 
         generate_button = gr.Button("Generate")
         generate_button.click(fn=gemini_tts.tts, inputs=[prompt, speaker, api_key], outputs=audio_output)
@@ -64,7 +64,7 @@ with gr.Blocks() as demo:
         prompt = gr.Textbox(label="prompt", placeholder="入力テキスト。")
         voice_id = gr.Textbox(label="voice_id", placeholder="音声ID。ElevenLabsのサイトで確認できます。", value="JBFqnCBsd6RMkjVDRZzb")
         api_key = gr.Textbox(label="API Key", placeholder="ElevenLabs API Key", value=elevenlabs_api_key if os.path.exists('elevenlabs_api_key.txt') else "")
-        audio_output = gr.Audio(label="生成音声", buttons=[])
+        audio_output = gr.Audio(label="生成音声", buttons=["download"])
         generate_button = gr.Button("Generate")
         generate_button.click(fn=elevenlabs_tts.tts, inputs=[prompt, api_key, voice_id], outputs=audio_output)
     with gr.Tab("Voicevox"):
@@ -74,7 +74,7 @@ with gr.Blocks() as demo:
         prompt = gr.Textbox(label="prompt", placeholder="入力テキスト。")
         speaker = gr.Dropdown(label="speaker", choices=list(voicevox.VOICE_MODELS.keys()), value="ずんだもん")
         style = gr.Textbox(label="style", placeholder="スタイル。hなどと入力すると選択したキャラクターの一覧が表示されます。")
-        audio_output = gr.Audio(label="生成音声", buttons=[])
+        audio_output = gr.Audio(label="生成音声", buttons=["download"])
         generate_button = gr.Button("Generate")
         generate_button.click(fn=voicevox.tts, inputs=[prompt, speaker, style], outputs=audio_output)
     with gr.Tab("メニュー"):
