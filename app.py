@@ -16,7 +16,7 @@ if os.path.exists('elevenlabs_api_key.txt'):
 
 with gr.Blocks() as demo:
     with gr.Tab("Gemini"):
-        gr.Markdown("# Gemini 3.1 Flash TTS Preview")
+        gr.Markdown("# Gemini 3.8 Flash TTS")
         gr.Markdown("API Keyは[ここ](https://aistudio.google.com/api-keys)から取得してください。")
         prompt = gr.Textbox(label="prompt", placeholder="入力テキスト。")
         api_key = gr.Textbox(label="API Key", placeholder="Gemini API Key", value=gemini_api_key if os.path.exists('gemini_api_key.txt') else "")
